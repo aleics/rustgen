@@ -7,7 +7,6 @@ fn main() {
     //initialization of variables
     let pop_size: u32 = 10;
     let n_genes: u32 = 8;
-    let rate_mut = 1/n_genes; //rate_mut: f32
     let max_gens: u32 = 500;
 
     //declaration of the arrays for the fitness
@@ -30,10 +29,17 @@ fn main() {
             fitness.push(sum);
         }
 
-        let (max_fitness, best_indiv) = get_max(&fitness); //get the best indiv and its fitness
-        let median_fitness = get_median(&fitness); //get the median fitness
+        let (max_fitness, best_indiv_idx) = get_max(&fitness); //get the best indiv and its fitness
+        if best_indiv_idx == -1 {
+            break;
+        }
+
+        let mut best_indiv: Vec<u32> = Vec::new(); 
+        best_indiv.clone_from(&pop[best_indiv_idx as usize]);
 
         max_fitness_arr.push(max_fitness);
+        
+        let median_fitness = get_median(&fitness); //get the median fitness
         median_fitness_arr.push(median_fitness);
 
         println!("maxfitness = {}", max_fitness);
@@ -72,7 +78,26 @@ fn main() {
             new_pop.push(new_gene);
         }
 
-        pop = new_pop;        
+        //mutation
+        let do_mutation: Vec<Vec<u32>> = create_random_matrix(pop_size, n_genes, 0, 1);
+        for i in 0..pop_size {
+            for j in 0..n_genes {
+                if do_mutation[i as usize][j as usize] == 1 {
+                    if new_pop[i as usize][j as usize] == 1 {
+                        new_pop[i as usize][j as usize] = 0;
+                    } else {
+                        new_pop[i as usize][j as usize] = 1;
+                    } 
+                }
+            }
+        }        
+
+        pop = new_pop;
+        pop[0] = best_indiv; //elitism
+
+        if max_fitness == n_genes {
+            break;
+        }        
     }
 }
 
