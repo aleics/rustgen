@@ -1,0 +1,7 @@
+[package]
+name = "onemax"
+version = "0.1.0"
+authors = ["Aleics <aleics.casanovas@gmail.com>"]
+
+[dependencies]
+rand = "*"
