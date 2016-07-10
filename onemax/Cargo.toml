@@ -1,6 +1,6 @@
 [package]
 name = "onemax"
-version = "0.1.0"
+version = "0.1.2"
 authors = ["Aleics <aleics.casanovas@gmail.com>"]
 
 [dependencies]
