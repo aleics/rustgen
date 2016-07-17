@@ -28,7 +28,7 @@ fn main() {
     let mut median_fitness_arr: Vec<f32> = Vec::with_capacity(max_gens as usize);
 
     // population initialization
-    let mut pop: Vec<Vec<u32>> = create_random_matrix(pop_size, n_genes, 0, 1);  
+    let mut pop: Vec<Vec<u32>> = create_random_matrix(pop_size, n_genes, 0, 1);
 
     // iterate for the generations
     for gen in 0..max_gens {
@@ -52,9 +52,9 @@ fn main() {
         max_fitness_arr.push(max_fitness);
 
         // save the best individual
-        let mut best_indiv: Vec<u32> = Vec::new(); 
+        let mut best_indiv: Vec<u32> = Vec::new();
         best_indiv.clone_from(&pop[best_indiv_idx as usize]);
-        
+
         // calculate the median fitness of the current generation
         let median_fitness = get_median(&fitness);
         median_fitness_arr.push(median_fitness);
@@ -70,7 +70,7 @@ fn main() {
 
         // Crossover
         // determine randomly if the crossover will be made
-        let do_xover = create_random_vec(pop_size, 0, 1); 
+        let do_xover = create_random_vec(pop_size, 0, 1);
 
         let mut new_pop: Vec<Vec<u32>> = Vec::with_capacity(pop_size as usize);
         for i in 0..pop.len() {
@@ -104,10 +104,10 @@ fn main() {
                         new_pop[i as usize][j as usize] = 0;
                     } else {
                         new_pop[i as usize][j as usize] = 1;
-                    } 
+                    }
                 }
             }
-        }        
+        }
 
         pop = new_pop;
 
@@ -119,14 +119,14 @@ fn main() {
             println!("best fitness = {}", max_fitness);
             println!("median fitness = {}", median_fitness);
             break;
-        }        
+        }
     }
 }
 
 /// Create a random matrix between an specific range
 fn create_random_matrix(size_row: u32, size_col: u32, min_range: u32, max_range: u32) -> Vec<Vec<u32>> {
     let mut mat: Vec<Vec<u32>> = Vec::with_capacity(size_row as usize);
-    
+
     for _ in 0..size_row {
         let mut row: Vec<u32> = Vec::with_capacity(size_col as usize);
         for _ in 0..size_col {
@@ -144,7 +144,7 @@ fn create_random_vec(size: u32, min_range: u32, max_range: u32) -> Vec<u32> {
     let mut v: Vec<u32> = Vec::with_capacity(size as usize);
     for _ in 0..size {
     	let num: u32 = rand::thread_rng().gen_range(min_range, max_range + 1);
-        v.push(num);        
+        v.push(num);
     }
     v
 }
