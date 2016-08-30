@@ -1,7 +1,3 @@
-extern crate rand;
-
-use rand::Rng;
-
 /// Onemax is a basic problem of evolutionary algorithms. The aim of the problem is to find a individuals
 /// where its genes are all '1'. This is the first algorithm that I learned, when I was introduced to the
 /// world of the Genetics Algorithms.
@@ -15,6 +11,10 @@ use rand::Rng;
 /// * Mutation: if decided, a gene of the new population's individuals will be modified.
 /// * Elitism: to preserve that the best individual of the last population won't be deleted, will be saved on the
 ///   new population.
+
+extern crate rand;
+
+use rand::Rng;
 
 fn main() {
     // initialization of variables
